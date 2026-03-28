@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Priya 💖</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* START SCREEN */
+#startScreen {
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:linear-gradient(135deg,#000,#1a001a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+    color:white;
+    text-align:center;
+}
+
+#startScreen h1 {
+    font-size:40px;
+    text-shadow:0 0 20px #ff4da6,0 0 40px #ff4da6;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow:0 0 10px #ff4da6; }
+    to { text-shadow:0 0 30px #ff1a75,0 0 60px #ff1a75; }
+}
+
+/* STORY CONTAINER */
+.story {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+/* SLIDES */
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1.5s ease;
+}
+
+.slide img {
+    width: 90%;
+    max-height: 75vh;
+    border-radius: 20px;
+
+    transform: scale(1.2);
+    filter: blur(10px) brightness(0.6);
+    transition: transform 4s ease, filter 4s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide.active img {
+    transform: scale(1);
+    filter: blur(0) brightness(1);
+}
+
+/* TEXT */
+.text {
+    position: absolute;
+    bottom: 80px;
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeText 3s forwards;
+}
+
+@keyframes fadeText {
+    0% {opacity:0; transform: translateY(20px);}
+    100% {opacity:1; transform: translateY(0);}
+}
+
+/* NAME */
+.name {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    text-shadow: 0 0 20px #ff4da6;
+}
+
+/* FINAL */
+.final {
+    display: none;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+}
+
+.final h1 {
+    font-size: 30px;
+    text-shadow: 0 0 20px #ff4da6;
+}
+
+/* HEARTS */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    to { transform: translateY(-100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+    <h1>✨ Priya 💖 ✨</h1>
+    <p>A small surprise for you...</p>
+    <button onclick="startExperience()" style="
+        margin-top:20px;
+        padding:12px 25px;
+        border:none;
+        border-radius:25px;
+        background:#ff4da6;
+        color:white;
+        font-size:16px;
+        box-shadow:0 0 20px #ff4da6;
+        cursor:pointer;
+    ">
+    🎬 Start
+    </button>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" autoplay muted loop>
+  <source src="file:///C:/Users/mohan/OneDrive/Desktop/file/song.mp3" type="audio/mp3">
+</audio>
+
+<div class="story" id="story">
+
+<div class="name">✨ Priya 💖 ✨</div>
+
+<div class="slide">
+    <img src="C:\Users\mohan\OneDrive\Desktop\file\WhatsApp Image 2026-03-28 at 9.39.31 PM.jpeg">
+    <div class="text">The day you entered... 🌸</div>
+</div>
+
+<div class="slide">
+    <img src="https://i.imgur.com/8Km9tLL.png">
+    <div class="text">Everything felt a little brighter ✨</div>
+</div>
+
+<div class="slide">
+    <img src="C:\Users\mohan\OneDrive\Desktop\file\WhatsApp Image 2026-03-28 at 9.39.58 PM.jpeg">
+    <div class="text">A new place... a new beginning 🌈</div>
+</div>
+
+<div class="slide">
+    <img src="https://i.imgur.com/jQ9Z6Gk.png">
+    <div class="text">But your smile stayed the same 😊</div>
+</div>
+
+<div class="slide">
+    <img src="C:\Users\mohan\OneDrive\Desktop\file\WhatsApp Image 2026-03-28 at 9.40.20 PM.jpeg">
+    <div class="text">Slowly… you became special 💖</div>
+</div>
+
+<div class="slide">
+    <img src="C:\Users\mohan\OneDrive\Desktop\file\WhatsApp Image 2026-03-28 at 9.40.37 PM.jpeg">
+    <div class="text">More than just a memory 🌙</div>
+</div>
+
+</div>
+
+<!-- FINAL -->
+<div class="final" id="final">
+    <h1>💌 You are not just a student...</h1>
+    <h2>You are someone unforgettable 💖</h2>
+</div>
+
+<!-- HEARTS -->
+<div class="heart" style="left:10%">💖</div>
+<div class="heart" style="left:30%">💗</div>
+<div class="heart" style="left:50%">💞</div>
+<div class="heart" style="left:70%">💕</div>
+<div class="heart" style="left:90%">💓</div>
+
+<script>
+
+let slides = document.getElementsByClassName("slide");
+let index = 0;
+
+function showCinematic() {
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+    }
+
+    index++;
+
+    if (index > slides.length) {
+        document.getElementById("story").style.display = "none";
+        document.getElementById("final").style.display = "flex";
+        return;
+    }
+
+    slides[index - 1].classList.add("active");
+
+    setTimeout(showCinematic, 4000);
+}
+
+/* START BUTTON */
+function startExperience() {
+    document.getElementById("startScreen").style.display = "none";
+
+    let audio = document.getElementById("bgMusic");
+    audio.muted = false;
+    audio.play().catch(()=>{});
+
+    showCinematic();
+}
+
+</script>
+
+</body>
+</html>
